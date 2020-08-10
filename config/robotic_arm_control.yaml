@@ -1,0 +1,44 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+arm_position_controller:
+  type: effort_controllers/JointTrajectoryController
+  joints:
+    - joint_1
+    - joint_2
+    - joint_3
+    - joint_4
+    - joint_5
+    - joint_6
+
+  constraints:
+    goal_time: 2.5                   # Override default
+    stopped_velocity_tolerance: 1.0 # Override default
+    joint_1:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+    joint_2:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+    joint_3:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+    joint_4:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+    joint_5:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+    joint_6:
+      trajectory: 1.0               # Not enforced if unspecified
+      goal: 0.8                    # Not enforced if unspecified
+
+  gains:
+    joint_1: {p: 10, i: 0.1, d: 0.1}
+    joint_2: {p: 10,  i: 0.1, d: 0.1}
+    joint_3: {p: 10, i: 0.1, d: 0.1}
+    joint_4: {p: 10,  i: 0.1, d: 0.1}
+    joint_5: {p: 10,  i: 0.1, d: 0.1}
+    joint_6: {p: 10,  i: 0.1, d: 0.1}
+
