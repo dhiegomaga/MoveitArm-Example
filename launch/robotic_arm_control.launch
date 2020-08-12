@@ -5,7 +5,14 @@
 
   <!-- load the controllers -->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
-    output="screen" ns="/" args="joint_state_controller arm_position_controller" />
+    output="screen" ns="/" args="joint_state_controller arm_position_controller --timeout 50" />
+ 
+
+<!-- TESTING ONLY 
+  <arg name="urdf_path" default="$(find edo_moveit_config)/robots/edo_gazebo.urdf"/>
+  <param name="robot_description" textfile="$(arg urdf_path)" />
+-->
+
 
   <!-- convert joint states to TF transforms for rviz, etc -->
   <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"

@@ -26,11 +26,13 @@ First thing to consider when going from simulated robot to the real robot is the
 
 <img src="images/rosgraph.png" alt="node graph" width="550"/>
 
-What needs to be implemented is a node, that talks to the robot's motors, and provides the `/action_position_controller/follow_joint_trajectory` action server interfaces, and also publishes the current `joint_states`.
+-   What needs to be implemented is a node, that talks to the robot's motors, and provides the `/action_position_controller/follow_joint_trajectory` action server interfaces, and also publishes the current `joint_states`.
 
-`/action_position_controller/follow_joint_trajectory` is the interface through which joint position commands are sent by the controller to the robot.
+-   `/action_position_controller/follow_joint_trajectory` is the interface through which joint position commands are sent by the controller to the robot.
 
-The node **state_publisher** uses the previously loaded `robot_description` param, as well as the topic `/joint_states` to output the current robot representation. It's not shown on this visualization, but the node **move_group** also subscribes to `/joint_states` to calculate the joint trajectories and planing of the robot.
+-   The node **state_publisher** uses the previously loaded `robot_description` param, as well as the topic `/joint_states` to output the current robot representation. It's not shown on this visualization, but the node **move_group** also subscribes to `/joint_states` to calculate the joint trajectories and planing of the robot.
+
+-   [This](https://www.slaterobotics.com/blog/5abd8a1ed4442a651de5cb5b/how-to-implement-ros_control-on-a-custom-robot) explains much better the whole process.
 
 ## Issues Encountered
 
