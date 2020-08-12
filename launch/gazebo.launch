@@ -7,8 +7,10 @@
   <arg name="debug" default="false" />
   <arg name="verbose" default="true" />
 
+  <!-- Load robot_description for Gazebo and 'robot_state_publisher' node -->
   <arg name="urdf_path" default="$(find edo_moveit_config)/robots/edo_gazebo.urdf"/>
-
+  <param name="robot_description" textfile="$(arg urdf_path)" />
+ 
   <!-- startup simulated world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find edo_moveit_config)/worlds/empty.world"/>
@@ -17,9 +19,6 @@
     <arg name="gui" value="$(arg gui)"/>
     <arg name="verbose" value="$(arg verbose)" />
   </include>
-
-  <!-- send robot urdf to param server -->
-  <param name="robot_description" textfile="$(arg urdf_path)" />
 
   <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
   <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -x 0 -y 0 -z 0"

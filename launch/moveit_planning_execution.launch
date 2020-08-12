@@ -14,7 +14,7 @@
     <arg name="debug" value="false"/>
   </include> 
 
-  <!-- Generate/Load robot description file -->
+  <!-- State Publisher and Controller Spawner -->
   <include file="$(find edo_moveit_config)/launch/robotic_arm_control.launch"/>
   
   <include file="$(find edo_moveit_config)/launch/moveit_rviz.launch">
