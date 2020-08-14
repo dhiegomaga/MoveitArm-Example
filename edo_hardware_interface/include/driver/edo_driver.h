@@ -3,6 +3,7 @@
 
 #include <edo_core_msgs/MovementCommand.h>
 #include <edo_core_msgs/JointsPositions.h>
+#include <edo_core_msgs/JointStateArray.h>
 #include <ros/node_handle.h>
 #include <ros/ros.h>
 #include <string>
@@ -24,7 +25,7 @@ namespace edo_driver
             unsigned num_joints;
             ros::Subscriber sub;
 
-            void jointPositionsCallback(const edo_core_msgs::JointsPositions::ConstPtr&);
+            void jointPositionsCallback(const edo_core_msgs::JointStateArray::ConstPtr&);
     };
 }
 
