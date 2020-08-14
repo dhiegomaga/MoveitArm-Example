@@ -1,10 +1,11 @@
 #ifndef EDO_DRIVER_H
 #define EDO_DRIVER_H
 
-//#include <vector>
 #include <edo_core_msgs/MovementCommand.h>
+#include <edo_core_msgs/JointsPositions.h>
 #include <ros/node_handle.h>
 #include <ros/ros.h>
+#include <string>
 
 namespace edo_driver
 {
@@ -12,14 +13,18 @@ namespace edo_driver
     {
         public:
             edo(ros::NodeHandle& nh, unsigned num_joints);
-            std::vector<double> getJoints();
-            void setJoints( std::vector<double> joint_positions);
-
+            std::vector<float> getJoints();
+            void setJoints( std::vector<float> joint_positions);
+            
         protected:
             ros::NodeHandle nh_;
             ros::Publisher move_pub;
             edo_core_msgs::MovementCommand move_command;
-            std::vector<double> current_joint_positions; 
+            std::vector<float> current_joint_positions; 
+            unsigned num_joints;
+            ros::Subscriber sub;
+
+            void jointPositionsCallback(const edo_core_msgs::JointsPositions::ConstPtr&);
     };
 }
 
