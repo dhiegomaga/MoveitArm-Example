@@ -26,10 +26,22 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(roscpp REQUIRED)
 
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES edo_hardware_interface
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS roscpp
+INCLUDE_DIRS 
+    include
+LIBRARIES 
+    edo_hardware_interface
+    edo_driver
+CATKIN_DEPENDS 
+    hardware_interface
+    controller_manager
+    roscpp
+    control_msgs
+    trajectory_msgs
+    pluginlib
+    transmission_interface
+    urdf
+    control_toolbox
+    joint_limits_interface
 )
 
 ## Build talker and listener
@@ -38,11 +50,15 @@ include_directories(
     include ${catkin_INCLUDE_DIRS}
 )
 
-add_library(edo_driver src/edo_driver.cpp)
-target_link_libraries(edo_driver
+add_library(edo_hardware_interface src/edo_hardware_interface.cpp src/edo_driver.cpp)
+target_link_libraries(edo_hardware_interface
 	${catkin_LIBRARIES})
+
+# add_library(edo_hardware_interface src/edo_driver.cpp)
+# target_link_libraries(edo_hardware_interface
+# 	${catkin_LIBRARIES})
 
 add_executable(hardware_interface_node src/edo_hardware_interface_node.cpp)
 target_link_libraries(hardware_interface_node 
-    edo_driver
+    edo_hardware_interface
     ${catkin_LIBRARIES})

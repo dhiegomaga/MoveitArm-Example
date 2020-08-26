@@ -1,4 +1,3 @@
-
 #include <driver/edo_driver.h>
 
 namespace edo_driver

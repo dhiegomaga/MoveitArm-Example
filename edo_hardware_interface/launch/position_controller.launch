@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- Load robot_description for robot state publisher node -->
+    <arg name="urdf_path" default="$(find edo_moveit_config)/robots/edo_gazebo.urdf"/>
+    <param name="robot_description" textfile="$(arg urdf_path)" />
+
+    <!-- convert joint states to TF transforms for rviz, etc -->
+    <node name="state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen">
+    </node>
+
+    <!-- Launch the actual robot controller -->
+    <rosparam file="$(find edo_hardware_interface)/config/hardware.yaml" command="load"/>
+    <rosparam file="$(find edo_hardware_interface)/config/controllers.yaml" command="load"/>
+    <rosparam file="$(find edo_hardware_interface)/config/joint_limits.yaml" command="load"/>
+
+    <node name="hardware_interface_node" pkg="edo_hardware_interface" type="hardware_interface_node" output="screen"/>
+
+</launch>

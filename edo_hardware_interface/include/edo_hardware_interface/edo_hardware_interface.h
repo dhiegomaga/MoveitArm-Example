@@ -10,11 +10,13 @@
 #include <joint_limits_interface/joint_limits_rosparam.h>
 #include <controller_manager/controller_manager.h>
 #include <boost/scoped_ptr.hpp>
+#include <std_msgs/String.h>
 #include <ros/ros.h>
-// #include <edocpp/edo.h>
 #include <edo_hardware_interface/edo_hardware.h>
+#include <driver/edo_driver.h>
 
 using namespace hardware_interface;
+using namespace edo_driver;
 using joint_limits_interface::JointLimits;
 using joint_limits_interface::SoftJointLimits;
 using joint_limits_interface::PositionJointSoftLimitsHandle;
@@ -29,7 +31,7 @@ namespace edo_hardware_interface
     class edoHardwareInterface: public edo_hardware_interface::edoHardware
     {
         public:
-            edoHardwareInterface(ros::NodeHandle& nh);
+            edoHardwareInterface(ros::NodeHandle& nh, unsigned num_driver_joints);
             ~edoHardwareInterface();
             void init();
             void update(const ros::TimerEvent& e);
@@ -37,8 +39,9 @@ namespace edo_hardware_interface
             void write(ros::Duration elapsed_time);
 
         protected:
-            //edocpp::edo edo;
+            edo_driver::edo *driver;
             ros::NodeHandle nh_;
+            ros::Publisher joints_pub;
             ros::Timer non_realtime_loop_;
             ros::Duration control_period_;
             ros::Duration elapsed_time_;

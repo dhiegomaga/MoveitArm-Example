@@ -85,6 +85,14 @@ joint_limits:
 ...
 ```
 
+### Cannot enforce limits for joint error
+
+The following error occurred during the execution of the `postion_controller.launch` file:
+
+```bash
+Cannot enforce limits for joint 'joint_1'. It has no velocity limits specification.
+```
+
 ## Credits
 
 Largely inspired by [this repository](https://github.com/kkumpa/ros-robotic-arm). However, MoveIt IK did not work with it, and I hypothesize it is because the arm in question does not possess 6 DoF (only 4). Hence the IK solver was not supposed to find a solution anyway.
